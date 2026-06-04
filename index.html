@@ -1,11 +1,114 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        canvas { border: 1px solid black; }
+        #score { font-size: 24px; }
+    </style>
 </head>
 <body>
-    <canvas id="gameCanvas" width="800" height="400"></canvas>
-    <div id="score">0</div>
-    <script src="script.js"></script>
+    <canvas id="gameCanvas" width="500" height="400"></canvas>
+    <div>Счёт: <span id="score">0</span></div>
+    <button onclick="startGame()">Начать заново</button>
+
+    <script>
+        // ========== ЭТО САМА ИГРА ==========
+        
+        // 1. НАХОДИМ ЭЛЕМЕНТЫ НА СТРАНИЦЕ
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        
+        // 2. ПЕРЕМЕННЫЕ ИГРЫ (тут хранятся данные)
+        let playerX = 220;      // где игрок по горизонтали
+        let targetX = 100;      // где цель по горизонтали
+        let targetY = 100;      // где цель по вертикали
+        let score = 0;          // очки
+        let gameRunning = true; // игра идёт или нет?
+        
+        // 3. РИСОВАНИЕ (что видит игрок)
+        function draw() {
+            // очищаем поле (серый фон)
+            ctx.fillStyle = '#ddd';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // рисуем игрока (синий квадрат)
+            ctx.fillStyle = 'green';
+            ctx.fillRect(playerX, 350, 60, 30);
+            
+            // рисуем цель (красный квадрат)
+            ctx.fillStyle = 'red';
+            ctx.fillRect(targetX, targetY, 30, 30);
+            
+            // показываем счёт
+            scoreElement.textContent = score;
+        }
+        
+        // 4. ДВИЖЕНИЕ ИГРОКА (клавиши ← и →)
+        document.addEventListener('keydown', function(event) {
+            if (!gameRunning) return; // если игра кончилась — не двигаем
+            
+            if (event.key === 'ArrowLeft') {
+                playerX = playerX - 20;
+            }
+            if (event.key === 'ArrowRight') {
+                playerX = playerX + 20;
+            }
+            
+            // не даём выйти за левый край
+            if (playerX < 0) playerX = 0;
+            // не даём выйти за правый край
+            if (playerX > canvas.width - 60) playerX = canvas.width - 60;
+            
+            draw(); // перерисовываем
+        });
+        
+        // 5. ПРОВЕРКА: поймали цель?
+        function checkCatch() {
+            // если цель коснулась игрока (примерно)
+            if (targetY + 30 >= 350 && targetX + 30 > playerX && targetX < playerX + 60) {
+                score = score + 1;           // +1 очко
+                // новая цель в случайном месте
+                targetX = Math.random() * (canvas.width - 30);
+                targetY = Math.random() * 200;
+            }
+        }
+        
+        // 6. ПАДЕНИЕ ЦЕЛИ (само падает вниз)
+        function updateTarget() {
+            if (!gameRunning) return;
+            
+            targetY = targetY + 3; // падает вниз
+            
+            // если упала ниже игрока — проигрыш
+            if (targetY > canvas.height) {
+                gameRunning = false;
+                alert('Игра кончилась! Счёт: ' + score);
+            }
+            
+            checkCatch(); // проверяем, не поймали ли
+        }
+        
+        // 7. ИГРОВОЙ ЦИКЛ (обновляет игру 60 раз в секунду)
+        function gameLoop() {
+            updateTarget(); // двигаем цель
+            draw();         // рисуем всё заново
+            requestAnimationFrame(gameLoop); // повторяем
+        }
+        
+        // 8. ЗАПУСК ИГРЫ
+        function startGame() {
+            gameRunning = true;
+            score = 0;
+            targetX = Math.random() * (canvas.width - 30);
+            targetY = Math.random() * 200;
+            playerX = 220;
+            draw();
+        }
+        
+        // СТАРТ!
+        startGame();
+        gameLoop();
+    </script>
 </body>
 </html>
