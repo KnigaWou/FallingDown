@@ -22,7 +22,7 @@ function draw() {
             ctx.drawImage(trampedImage, trampedX, 0, trampedWidth, canvas.height);
 
             if (peopleImage.complete && peopleImage.src) {
-            let peopleWidth = 300;
+            let peopleWidth = 350;
             let peopleHeight = 900;
             let peopleX = (canvas.width - peopleWidth) / 2;
             ctx.drawImage(peopleImage, peopleX, 0, peopleWidth, peopleHeight);
