@@ -14,4 +14,4 @@ function draw()
         ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
  }
 }
-draw();
+draw()
