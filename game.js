@@ -14,7 +14,7 @@ function draw() {
         ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
             if (trampedImage.complete && trampedImage.src) {
-            let pipeWidth = 60;
+            let pipeWidth = 100;
             let pipeX = (canvas.width - pipeWidth) / 2;
             ctx.drawImage(trampedImage, pipeX, 0, pipeWidth, canvas.height);
             }
