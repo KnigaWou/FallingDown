@@ -19,7 +19,7 @@ function draw() {
             if (trampedImage.complete && trampedImage.src) {
             let trampedWidth = 350;
             let trampedX = (canvas.width - trampedWidth) / 2;
-            ctx.drawImage(trampedImage, pipeX, 0, pipeWidth, canvas.height);
+            ctx.drawImage(trampedImage, trampedX, 0, trampedWidth, canvas.height);
 
             if (peopleImage.complete && peopleImage.src) {
             let peopleWidth = 300;
