@@ -17,15 +17,15 @@ function draw() {
         ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
             if (trampedImage.complete && trampedImage.src) {
-            let pipeWidth = 350;
-            let pipeX = (canvas.width - pipeWidth) / 2;
+            let trampedWidth = 350;
+            let trampedX = (canvas.width - trampedWidth) / 2;
             ctx.drawImage(trampedImage, pipeX, 0, pipeWidth, canvas.height);
 
             if (peopleImage.complete && peopleImage.src) {
-            let pipeWidth = 300;
-            let pipeHeigh = 900;
-            let pipeX = (canvas.width - pipeWidth) / 2;
-            ctx.drawImage(peopleImage, pipeX, 0, pipeWidth, pipeHeigh);
+            let peopleWidth = 300;
+            let peopleHeigh = 900;
+            let peopleX = (canvas.width - peopleWidth) / 2;
+            ctx.drawImage(peopleImage, peopleX, 0, pipeWidth, peopleHeigh);
             }
             }
     }
