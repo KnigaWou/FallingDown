@@ -12,15 +12,6 @@ function draw()
     if (backgroundImage.complete && backgroundImage.src) 
  {
         ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
- } else 
-    {
-        ctx.fillStyle = '#333';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = 'white';
-        ctx.font = '14px Arial';
-        ctx.fillText('Загрузите картинку в папку', 50, 300);
-        ctx.fillText('И измените имя файла в game.js', 50, 330);
-    }
-}
+ }
 
 draw();
