@@ -5,7 +5,7 @@ let playerY = 100;
 
 function draw() 
 {
-
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'red';
     ctx.fillRect(playerX, playerY, 50, 50);
 }
