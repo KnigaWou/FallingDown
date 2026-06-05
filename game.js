@@ -3,7 +3,7 @@ let ctx = canvas.getContext('2d');
 
 
 let backgroundImage = new Image();
-backgroundImage.src = 'Background.jpg';
+backgroundImage.src = 'pictures/Background.jpg';
 
 function draw() 
 {
