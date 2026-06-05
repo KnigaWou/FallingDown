@@ -25,7 +25,7 @@ function draw() {
             let peopleWidth = 300;
             let peopleHeight = 900;
             let peopleX = (canvas.width - peopleWidth) / 2;
-            ctx.drawImage(peopleImage, peopleX, 300, peopleWidth, peopleHeight);
+            ctx.drawImage(peopleImage, peopleX, 0, peopleWidth, peopleHeight);
             }
             }
     }
