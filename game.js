@@ -17,7 +17,7 @@ function draw() {
         ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
             if (peopleImage.complete && peopleImage.src) {
-            let peopleWidth = 350;
+            let peopleWidth = 400;
             let peopleHeight = 900;
             let peopleX = (canvas.width - peopleWidth) / 2;
             ctx.drawImage(peopleImage, peopleX, 0, peopleWidth, peopleHeight);
