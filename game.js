@@ -1,5 +1,5 @@
 // Переменная для высоты человечка
-let peopleStateHeight = 1000;
+let peopleStateHeight = 700;
 
 let canvas = document.getElementById('gameCanvas');
 let ctx = canvas.getContext('2d');
@@ -25,8 +25,8 @@ function draw() {
             ctx.drawImage(trampedImage, trampedX, 0, trampedWidth, canvas.height);
 
             if (peopleImage.complete && peopleImage.src) {
-                let peopleWidth = 400;
-                let peopleHeight = 900;
+                let peopleWidth = 370;
+                let peopleHeight = 800;
                 let peopleX = (canvas.width - peopleWidth) / 2;
                 let peopleY = (canvas.height - peopleStateHeight) / 2;
                 ctx.drawImage(peopleImage, peopleX, peopleY, peopleWidth, peopleHeight);
