@@ -1,14 +1,67 @@
 <!DOCTYPE html>
+<!-- Говорим браузеру: "это HTML5 страница" -->
+
 <html>
+<!-- Всё, что между <html> и </html> — это веб-страница -->
+
 <head>
+    <!-- <head> — служебная информация, не видна игроку -->
+    
     <title>FallingDown</title>
+    <!-- Название на вкладке браузера -->
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!-- 
+        Адаптация для телефона:
+        - width=device-width — ширина страницы = ширина экрана телефона
+        - initial-scale=1.0 — не увеличивать страницу по умолчанию
+        - user-scalable=no — запрещаем масштабирование пальцами
+    -->
+    
     <link rel="stylesheet" href="styles.css">
+    <!-- Подключаем файл со стилями (CSS) -->
+    
+    <style>
+        /* Дополнительные стили прямо здесь, для телефона */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* Убираем все отступы у всех элементов */
+        }
+        
+        body {
+            background: #000;
+            /* Чёрный фон вокруг игры */
+            display: flex;
+            /* Включаем гибкое выравнивание */
+            justify-content: center;
+            /* Центрируем по горизонтали */
+            align-items: center;
+            /* Центрируем по вертикали */
+            min-height: 100vh;
+            /* Минимальная высота = весь экран */
+            touch-action: none;
+            /* Запрещаем прокрутку страницы пальцем */
+        }
+    </style>
 </head>
+
 <body>
-      <canvas 
-      id="gameCanvas" width="800" height="400">
-      </canvas>
+    <!-- <body> — то, что видит игрок -->
+    
+    <canvas id="gameCanvas" width="360" height="600"></canvas>
+    <!-- 
+        Холст для игры:
+        - id="gameCanvas" — имя, чтобы найти из JavaScript
+        - width="360" — ширина холста (стандарт телефона)
+        - height="600" — высота холста
+        На компьютере этот размер будет виден как "телефон"
+        На телефоне CSS растянет на весь экран
+    -->
+    
     <script src="game.js"></script>
+    <!-- Подключаем JavaScript с логикой игры -->
 </body>
+
 </html>
