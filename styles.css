@@ -1,58 +1,30 @@
-/* styles.css — файл с правилами оформления */
-
-canvas {
-    /* Выбираем все холсты на странице */
-    
-    border: 2px solid white;
-    /* Белая рамка вокруг игрового поля */
-    
-    display: block;
-    /* Делаем холст блочным элементом (убирает лишние отступы) */
-    
-    margin: 0 auto;
-    /* Центрируем по горизонтали */
-    
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    /* Тень вокруг холста */
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Для телефонов (ширина экрана меньше 768px) */
+body {
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+canvas {
+    display: block;
+}
 @media (max-width: 768px) {
     canvas {
         width: 100%;
-        /* На телефоне холст занимает всю ширину экрана */
-        
         height: auto;
-        /* Высота подстраивается автоматически */
-        
-        border: none;
-        /* Убираем рамку на телефоне */
-        
-        border-radius: 0;
-        /* Без закруглений */
-    }
-    
-    body {
-        background: #000;
-        /* Чёрный фон */
     }
 }
-
-/* Для компьютеров (ширина экрана больше 768px) */
 @media (min-width: 769px) {
     canvas {
         width: 360px;
-        /* На компьютере показываем как телефон (фиксированная ширина) */
-        
         height: 600px;
-        /* Фиксированная высота */
-        
         border-radius: 20px;
-        /* Скруглённые углы, как у телефона */
-    }
-    
-    body {
-        background: #1a1a2e;
-        /* Тёмный фон вокруг "телефона" */
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
 }
