@@ -5,7 +5,7 @@ let backgroundImage = new Image();
 backgroundImage.src = 'pictures/Background.jpg';
 
 let trampedImage = new Image();
-trampedImage.src = 'pictures/tramped.jpg';
+trampedImage.src = 'pictures/tramped.png';
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
