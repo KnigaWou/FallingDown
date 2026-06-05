@@ -23,9 +23,9 @@ function draw() {
 
             if (peopleImage.complete && peopleImage.src) {
             let peopleWidth = 300;
-            let peopleHeigh = 900;
+            let peopleHeight = 900;
             let peopleX = (canvas.width - peopleWidth) / 2;
-            ctx.drawImage(peopleImage, peopleX, 0, pipeWidth, peopleHeigh);
+            ctx.drawImage(peopleImage, peopleX, 0, pipeWidth, peopleHeight);
             }
             }
     }
