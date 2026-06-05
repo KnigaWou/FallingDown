@@ -1,17 +1,19 @@
 let canvas = document.getElementById('gameCanvas');
 let ctx = canvas.getContext('2d');
 
-// ЗАМЕНИТЕ 'имя_вашего_файла.png' на точное имя вашей картинки
+
 let backgroundImage = new Image();
 backgroundImage.src = 'имя_вашего_файла.png';
 
-function draw() {
+function draw() 
+{
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    if (backgroundImage.complete && backgroundImage.src) {
+    if (backgroundImage.complete && backgroundImage.src) 
+ {
         ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-    } else {
-        // Если картинка не загрузилась - временно серый фон
+ } else 
+    {
         ctx.fillStyle = '#333';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = 'white';
