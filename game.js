@@ -4,7 +4,7 @@ let peopleStateHeight = 700;
 
 let a = 333; // ШИРИНА РУК
 let b = 600; // ВЫСОТА РУК
-let c = 333; // Переменная высоты рук
+let c = 500; // Переменная высоты рук
 
 let canvas = document.getElementById('gameCanvas');
 let ctx = canvas.getContext('2d');
