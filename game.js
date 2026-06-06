@@ -1,6 +1,6 @@
 // Переменная для высоты человечка
 let peopleStateHeight = 700;
-const NEW_IMAGE_SCALE = 0.24;  // Изменить размер изображений
+const NEW_IMAGE_SCALE = 0.23;  // Изменить размер изображений
  let isBraking = false;
 
 let trampedFrames = [];      // массив для хранения кадров трубы
