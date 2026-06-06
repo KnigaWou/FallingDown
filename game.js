@@ -1,5 +1,6 @@
 // Переменная для высоты человечка
 let peopleStateHeight = 700;
+const NEW_IMAGE_SCALE = 0.5;  // Изменить размер изображений
  let isBraking = false;
 
 let a = 333; // ШИРИНА РУК
@@ -8,6 +9,18 @@ let c = 600; // Переменная высоты рук
 
 let canvas = document.getElementById('gameCanvas');
 let ctx = canvas.getContext('2d');
+
+function drawScaled(img) 
+{
+    if (img.complete) 
+    {
+        let w = img.width * NEW_IMAGE_SCALE;
+        let h = img.height * NEW_IMAGE_SCALE;
+        let x = (canvas.width - w) / 2;
+        let y = (canvas.height - h) / 2;
+        ctx.drawImage(img, x, y, w, h);
+    }
+}
 
 let backgroundImage = new Image();
 backgroundImage.src = 'pictures/Background.jpg';
@@ -56,39 +69,14 @@ function draw() //Рисуем
     {
     ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height); //ФОН
 
+drawScaled(tableImage);
+drawScaled(airoplaneImage);
+drawScaled(mImage);
+drawScaled(msImage);
+drawScaled(lineBImage);
+drawScaled(lineSImage);
+drawScaled(nmImage);
      
-// таблица
-if (tableImage.complete) {
-    ctx.drawImage(tableImage, 0, 0); // Рисует как есть, без изменения размера и позиции
-}
-
-// Препятствия
-if (airoplaneImage.complete) {
-    ctx.drawImage(airoplaneImage, 0, 0);
-}
-
-// Буквы M и MS
-if (mImage.complete) {
-    ctx.drawImage(mImage, 0, 0);
-}
-
-if (msImage.complete) {
-    ctx.drawImage(msImage, 0, 0);
-}
-
-// Линии
-if (lineBImage.complete) {
-    ctx.drawImage(lineBImage, 0, 0);
-}
-
-if (lineSImage.complete) {
-    ctx.drawImage(lineSImage, 0, 0);
-}
-
-if (nmImage.complete) {
-    ctx.drawImage(nmImage, 0, 0);
-}
-
         if (trampedImage.complete && trampedImage.src) {
             let trampedWidth = 350;
             let trampedX = (canvas.width - trampedWidth) / 2;
