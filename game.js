@@ -3,6 +3,13 @@ let peopleStateHeight = 700;
 const NEW_IMAGE_SCALE = 0.24;  // Изменить размер изображений
  let isBraking = false;
 
+let trampedFrames = [];      // массив для хранения кадров трубы
+let currentFrame = 0;        // какой кадр сейчас показываем (0, 1 или 2)
+let frameCounter = 0;        // счётчик для задержки между кадрами
+let frameDelay = 30;         // медленная смена (когда не тормозит)
+let fastFrameDelay = 5;      // быстрая смена (когда тормозит на полную)
+let maxSpeedFrames = 50;     // через сколько обновлений достичь макс скорости
+
 let a = 333; // ШИРИНА РУК
 let b = 600; // ВЫСОТА РУК
 let c = 600; // Переменная высоты рук
@@ -28,14 +35,17 @@ backgroundImage.src = 'pictures/Background.jpg';
 let peopleImage = new Image();
 peopleImage.src = 'pictures/people.png';
 
-let trampedImage = new Image();
-trampedImage.src = 'pictures/tramped.png';
+let trampedFrame0 = new Image();
+trampedFrame0.src = 'pictures/tramped.png';
 
-let tramped1Image = new Image();
-tramped1Image.src = 'pictures/tramped1.png';
+let trampedFrame1 = new Image();
+trampedFrame1.src = 'pictures/tramped1.png';
 
-let tramped2Image = new Image();
-tramped2Image.src = 'pictures/tramped2.png';
+let trampedFrame2 = new Image();
+trampedFrame2.src = 'pictures/tramped2.png';
+
+// Добавляем все кадры в массив trampedFrames
+trampedFrames.push(trampedFrame0, trampedFrame1, trampedFrame2);
 
 let peopleBrakingImage = new Image();
 peopleBrakingImage.src = 'pictures/people_braking.png';
@@ -83,10 +93,11 @@ drawScaled(lineBImage);
 drawScaled(lineSImage);
 drawScaled(nmImage);
      
-        if (trampedImage.complete && trampedImage.src) {
-            let trampedWidth = 350;
-            let trampedX = (canvas.width - trampedWidth) / 2;
-            ctx.drawImage(trampedImage, trampedX, 0, trampedWidth, canvas.height); //ТРУБА
+let currentTramped = trampedFrames[currentFrame];
+if (currentTramped && currentTramped.complete) {
+    let trampedWidth = 350;
+    let trampedX = (canvas.width - trampedWidth) / 2;
+    ctx.drawImage(currentTramped, trampedX, 0, trampedWidth, canvas.height); //ТРУБА
 
             if (peopleImage.complete && peopleImage.src) {
                 let peopleWidth = 370;
@@ -121,7 +132,7 @@ drawScaled(nmImage);
 
 // Функция ожидания загрузки всех изображений
 let imagesLoaded = 0;
-const totalImages = 13;
+const totalImages = 15;
 
 // Проверка, попал ли клик в область рук
 function isClickOnHands(clickX, clickY) 
@@ -181,7 +192,6 @@ function tryDraw() {
 
 backgroundImage.onload = tryDraw;
 peopleImage.onload = tryDraw;
-trampedImage.onload = tryDraw;
 peopleBrakingImage.onload = tryDraw;
 buttonNormalImage.onload = tryDraw;
 buttonActiveImage.onload = tryDraw;
@@ -192,3 +202,34 @@ msImage.onload = tryDraw;
 lineBImage.onload = tryDraw;
 lineSImage.onload = tryDraw;
 nmImage.onload = tryDraw;
+trampedFrame0.onload = tryDraw;
+trampedFrame1.onload = tryDraw;
+trampedFrame2.onload = tryDraw;
+
+// ФУНКЦИЯ АНИМАЦИИ ТРУБЫ (меняет кадры с разной скоростью)
+function updateAnimation() {
+    let currentDelay;
+    
+    if (isBraking) {
+        // Если тормозим — вычисляем скорость разгона
+        let speed = Math.min(frameCounter / maxSpeedFrames, 1);
+        // Плавно меняем задержку от медленной к быстрой
+        currentDelay = fastFrameDelay + (frameDelay - fastFrameDelay) * (1 - speed);
+    } else {
+        // Если не тормозим — медленная смена
+        currentDelay = frameDelay;
+        frameCounter = 0;  // Сбрасываем счётчик разгона
+    }
+    
+    frameCounter++;  // Увеличиваем счётчик
+    
+    // Если накопилось достаточно — меняем кадр
+    if (frameCounter >= currentDelay) {
+        frameCounter = 0;
+        currentFrame = (currentFrame + 1) % trampedFrames.length;  // 0→1→2→0→1...
+        draw();  // Перерисовываем экран с новым кадром
+    }
+}
+
+// ЗАПУСКАЕМ АНИМАЦИЮ (каждые 50 миллисекунд)
+setInterval(updateAnimation, 50);
