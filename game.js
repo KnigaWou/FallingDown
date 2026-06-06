@@ -210,7 +210,8 @@ trampedFrame2.onload = tryDraw;
 // ФУНКЦИЯ АНИМАЦИИ ТРУБЫ
 let brakingStartCounter = 0;
 
-function updateAnimation() {
+function updateAnimation() 
+{
     let currentDelay;
     
     if (isBraking) {
@@ -231,3 +232,5 @@ function updateAnimation() {
         draw();
     }
 }
+// ЗАПУСКАЕМ АНИМАЦИЮ (каждые 50 миллисекунд)
+setInterval(updateAnimation, 50);
