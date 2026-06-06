@@ -26,7 +26,27 @@ buttonNormalImage.src = 'pictures/button_normal.png';
 
 let buttonActiveImage = new Image();
 buttonActiveImage.src = 'pictures/button_active.png';
+//
+let tableImage = new Image();
+tableImage.src = 'pictures/flought_table.png';
 
+let airoplaneImage = new Image();
+airoplaneImage.src = 'pictures/flought_airoplane.png';
+
+let mImage = new Image();
+mImage.src = 'pictures/flought_m.png';
+
+let msImage = new Image();
+msImage.src = 'pictures/flought_ms.png';
+
+let lineBImage = new Image();
+lineBImage.src = 'pictures/lineB.png';
+
+let lineSImage = new Image();
+lineSImage.src = 'pictures/lineS.png';
+
+let nmImage = new Image();
+nmImage.src = 'pictures/nm.png';
 
 function draw() //Рисуем
 {
