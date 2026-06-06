@@ -1,6 +1,6 @@
 // Переменная для высоты человечка
 let peopleStateHeight = 700;
-const NEW_IMAGE_SCALE = 0.25;  // Изменить размер изображений
+const NEW_IMAGE_SCALE = 0.23;  // Изменить размер изображений
  let isBraking = false;
 
 let a = 333; // ШИРИНА РУК
@@ -30,6 +30,12 @@ peopleImage.src = 'pictures/people.png';
 
 let trampedImage = new Image();
 trampedImage.src = 'pictures/tramped.png';
+
+let tramped1Image = new Image();
+tramped1Image.src = 'pictures/tramped1.png';
+
+let tramped2Image = new Image();
+tramped2Image.src = 'pictures/tramped2.png';
 
 let peopleBrakingImage = new Image();
 peopleBrakingImage.src = 'pictures/people_braking.png';
