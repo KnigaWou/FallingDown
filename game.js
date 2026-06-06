@@ -1,6 +1,6 @@
 // Переменная для высоты человечка
 let peopleStateHeight = 700;
-const NEW_IMAGE_SCALE = 0.5;  // Изменить размер изображений
+const NEW_IMAGE_SCALE = 0.2;  // Изменить размер изображений
  let isBraking = false;
 
 let a = 333; // ШИРИНА РУК
