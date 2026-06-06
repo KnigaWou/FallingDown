@@ -1,6 +1,6 @@
 // Переменная для высоты человечка
 let peopleStateHeight = 700;
-const NEW_IMAGE_SCALE = 0.23;  // Изменить размер изображений
+const NEW_IMAGE_SCALE = 0.235;  // Изменить размер изображений
  let isBraking = false;
 
 let trampedFrames = [];      // массив для хранения кадров трубы
@@ -206,7 +206,7 @@ trampedFrame0.onload = tryDraw;
 trampedFrame1.onload = tryDraw;
 trampedFrame2.onload = tryDraw;
 
-// ФУНКЦИЯ АНИМАЦИИ ТРУБЫ (меняет кадры с разной скоростью)
+// ФУНКЦИЯ АНИМАЦИИ ТРУБЫ (меняет кадры с разной скоростью) ....................................
 function updateAnimation() {
     let currentDelay;
     
