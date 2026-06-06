@@ -56,6 +56,39 @@ function draw() //Рисуем
     {
     ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height); //ФОН
 
+     
+// таблица
+if (tableImage.complete) {
+    ctx.drawImage(tableImage, 0, 0); // Рисует как есть, без изменения размера и позиции
+}
+
+// Препятствия
+if (airoplaneImage.complete) {
+    ctx.drawImage(airoplaneImage, 0, 0);
+}
+
+// Буквы M и MS
+if (mImage.complete) {
+    ctx.drawImage(mImage, 0, 0);
+}
+
+if (msImage.complete) {
+    ctx.drawImage(msImage, 0, 0);
+}
+
+// Линии
+if (lineBImage.complete) {
+    ctx.drawImage(lineBImage, 0, 0);
+}
+
+if (lineSImage.complete) {
+    ctx.drawImage(lineSImage, 0, 0);
+}
+
+if (nmImage.complete) {
+    ctx.drawImage(nmImage, 0, 0);
+}
+
         if (trampedImage.complete && trampedImage.src) {
             let trampedWidth = 350;
             let trampedX = (canvas.width - trampedWidth) / 2;
