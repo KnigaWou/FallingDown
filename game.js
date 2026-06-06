@@ -7,9 +7,9 @@ let trampedFrames = [];      // массив для хранения кадро�
 let currentFrame = 0;        // какой кадр сейчас показываем (0, 1 или 2)
 let frameCounter = 0;        // счётчик для задержки между кадрами
 
-let frameDelay = 30;         // медленная смена (когда не тормозит)
-let fastFrameDelay = 5;      // быстрая смена (когда тормозит на полную)
-let maxSpeedFrames = 50;     // через сколько обновлений достичь макс скорости
+let frameDelay = 30;      // СКОЛЬЖЕНИЕ: кадр меняется каждые 30 циклов (медленно)
+let fastFrameDelay = 5;   // ПАДЕНИЕ: максимальная скорость — каждые 5 циклов (быстро)
+let maxSpeedFrames = 50;  // Через 50 циклов падения достигаем максимальной скорости
 
 let a = 333; // ШИРИНА РУК
 let b = 600; // ВЫСОТА РУК
@@ -214,10 +214,12 @@ function updateAnimation() {
     let currentDelay;
     
     if (isBraking) {
+        // РЕЖИМ ПАДЕНИЯ: плавное ускорение
         let speed = Math.min(brakingStartCounter / maxSpeedFrames, 1);
         currentDelay = frameDelay - (frameDelay - fastFrameDelay) * speed;
         brakingStartCounter++;
     } else {
+        // РЕЖИМ СКОЛЬЖЕНИЯ: постоянная скорость
         currentDelay = frameDelay;
         brakingStartCounter = 0;
     }
