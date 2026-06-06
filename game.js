@@ -3,8 +3,8 @@ let peopleStateHeight = 700;
  let isBraking = false;
 
 let a = 333; // ШИРИНА РУК
-let b = 500; // ВЫСОТА РУК
-let c = 130; // Переменная высоты рук
+let b = 600; // ВЫСОТА РУК
+let c = 333; // Переменная высоты рук
 
 let canvas = document.getElementById('gameCanvas');
 let ctx = canvas.getContext('2d');
