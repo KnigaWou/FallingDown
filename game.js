@@ -6,6 +6,7 @@ const NEW_IMAGE_SCALE = 0.232;  // Изменить размер изображ�
 let trampedFrames = [];      // массив для хранения кадров трубы
 let currentFrame = 0;        // какой кадр сейчас показываем (0, 1 или 2)
 let frameCounter = 0;        // счётчик для задержки между кадрами
+
 let frameDelay = 30;         // медленная смена (когда не тормозит)
 let fastFrameDelay = 5;      // быстрая смена (когда тормозит на полную)
 let maxSpeedFrames = 50;     // через сколько обновлений достичь макс скорости
@@ -206,30 +207,25 @@ trampedFrame0.onload = tryDraw;
 trampedFrame1.onload = tryDraw;
 trampedFrame2.onload = tryDraw;
 
-// ФУНКЦИЯ АНИМАЦИИ ТРУБЫ (меняет кадры с разной скоростью) ....................................
+// ФУНКЦИЯ АНИМАЦИИ ТРУБЫ
+let brakingStartCounter = 0;
+
 function updateAnimation() {
     let currentDelay;
     
     if (isBraking) {
-        // Если тормозим — вычисляем скорость разгона
-        let speed = Math.min(frameCounter / maxSpeedFrames, 1);
-        // Плавно меняем задержку от медленной к быстрой
-        currentDelay = fastFrameDelay + (frameDelay - fastFrameDelay) * (1 - speed);
+        let speed = Math.min(brakingStartCounter / maxSpeedFrames, 1);
+        currentDelay = frameDelay - (frameDelay - fastFrameDelay) * speed;
+        brakingStartCounter++;
     } else {
-        // Если не тормозим — медленная смена
         currentDelay = frameDelay;
-        frameCounter = 0;  // Сбрасываем счётчик разгона
+        brakingStartCounter = 0;
     }
     
-    frameCounter++;  // Увеличиваем счётчик
-    
-    // Если накопилось достаточно — меняем кадр
+    frameCounter++;
     if (frameCounter >= currentDelay) {
         frameCounter = 0;
-        currentFrame = (currentFrame + 1) % trampedFrames.length;  // 0→1→2→0→1...
-        draw();  // Перерисовываем экран с новым кадром
+        currentFrame = (currentFrame + 1) % trampedFrames.length;
+        draw();
     }
 }
-
-// ЗАПУСКАЕМ АНИМАЦИЮ (каждые 50 миллисекунд)
-setInterval(updateAnimation, 50);
