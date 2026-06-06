@@ -127,7 +127,7 @@ if (nmImage.complete) {
 
 // Функция ожидания загрузки всех изображений
 let imagesLoaded = 0;
-const totalImages = 6;
+const totalImages = 13;
 
 // Проверка, попал ли клик в область рук
 function isClickOnHands(clickX, clickY) 
@@ -191,3 +191,10 @@ trampedImage.onload = tryDraw;
 peopleBrakingImage.onload = tryDraw;
 buttonNormalImage.onload = tryDraw;
 buttonActiveImage.onload = tryDraw;
+tableImage.onload = tryDraw;
+airoplaneImage.onload = tryDraw;
+mImage.onload = tryDraw;
+msImage.onload = tryDraw;
+lineBImage.onload = tryDraw;
+lineSImage.onload = tryDraw;
+nmImage.onload = tryDraw;
