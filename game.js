@@ -163,8 +163,7 @@ function isClickOnHands(clickX, clickY)
     return (clickX >= handsX && clickX <= handsX + handsWidth &&
             clickY >= handsY && clickY <= handsY + handsHeight);
 }
-canvas.addEventListener('mousedown', function(e) // Нажатие
-                        {
+canvas.addEventListener('mousedown', function(e) {
     let rect = canvas.getBoundingClientRect();
     let scaleX = canvas.width / rect.width;
     let scaleY = canvas.height / rect.height;
@@ -173,11 +172,15 @@ canvas.addEventListener('mousedown', function(e) // Нажатие
     
     if (isClickOnHands(mouseX, mouseY)) {
         isBraking = true;
-        // ===== РЕЗКИЙ РЫВОК ВНИЗ =====
+        
+        // Рывок скорости фона
         currentSpeed = currentSpeed + jerkForce;
-        // Не даём превысить максимальную скорость
         if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
-        // ===== КОНЕЦ РЫВКА =====
+        
+        // Рывок для анимации трубы
+        brakingStartCounter = brakingStartCounter + 15;
+        if (brakingStartCounter > maxSpeedFrames) brakingStartCounter = maxSpeedFrames;
+        
         draw();
     }
 });
@@ -188,14 +191,18 @@ canvas.addEventListener('mouseup', function() {
         draw();
     }
 });
-document.addEventListener('keydown', function(e) // Пробел
-                          {
+document.addEventListener('keydown', function(e) {
     if (e.key === ' ' || e.key === 'Space') {
         isBraking = true;
-        // ===== РЕЗКИЙ РЫВОК ВНИЗ =====
+        
+        // Рывок скорости фона
         currentSpeed = currentSpeed + jerkForce;
         if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
-        // ===== КОНЕЦ РЫВКА =====
+        
+        // Рывок для анимации трубы
+        brakingStartCounter = brakingStartCounter + 15;
+        if (brakingStartCounter > maxSpeedFrames) brakingStartCounter = maxSpeedFrames;
+        
         draw();
         e.preventDefault();
     }
