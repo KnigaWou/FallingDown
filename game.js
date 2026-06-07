@@ -19,6 +19,7 @@ let scrollY = 0;  // Смещение экрана (0 = вверху, 100 = вс
 let currentSpeed = 1;        // Текущая скорость движения
 let minSpeed = 1;            // Минимальная скорость (скольжение)
 let maxSpeed = 10;           // Максимальная скорость (падение)
+let jerkForce = 5;           // Сила рывка (на сколько увеличить скорость при нажатии)
 
 let canvas = document.getElementById('gameCanvas');
 let ctx = canvas.getContext('2d');
@@ -162,8 +163,8 @@ function isClickOnHands(clickX, clickY)
     return (clickX >= handsX && clickX <= handsX + handsWidth &&
             clickY >= handsY && clickY <= handsY + handsHeight);
 }
-// Нажатие мыши на холсте
-canvas.addEventListener('mousedown', function(e) {
+canvas.addEventListener('mousedown', function(e) // Нажатие
+                        {
     let rect = canvas.getBoundingClientRect();
     let scaleX = canvas.width / rect.width;
     let scaleY = canvas.height / rect.height;
@@ -172,6 +173,11 @@ canvas.addEventListener('mousedown', function(e) {
     
     if (isClickOnHands(mouseX, mouseY)) {
         isBraking = true;
+        // ===== РЕЗКИЙ РЫВОК ВНИЗ =====
+        currentSpeed = currentSpeed + jerkForce;
+        // Не даём превысить максимальную скорость
+        if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
+        // ===== КОНЕЦ РЫВКА =====
         draw();
     }
 });
@@ -182,12 +188,16 @@ canvas.addEventListener('mouseup', function() {
         draw();
     }
 });
-// Клавиша Пробел (нажатие)
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function(e) // Пробел
+                          {
     if (e.key === ' ' || e.key === 'Space') {
         isBraking = true;
+        // ===== РЕЗКИЙ РЫВОК ВНИЗ =====
+        currentSpeed = currentSpeed + jerkForce;
+        if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
+        // ===== КОНЕЦ РЫВКА =====
         draw();
-        e.preventDefault(); // чтобы страница не прокручивалась
+        e.preventDefault();
     }
 });
 
