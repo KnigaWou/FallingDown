@@ -19,7 +19,7 @@ let scrollY = 0;  // Смещение экрана (0 = вверху, 100 = вс
 let currentSpeed = 1;        // Текущая скорость движения
 let minSpeed = 1;            // Минимальная скорость (скольжение)
 let maxSpeed = 10;           // Максимальная скорость (падение)
-let jerkForce = 5;           // Сила рывка (на сколько увеличить скорость при нажатии)
+let jerkForce = 20;           // Сила рывка (на сколько увеличить скорость при нажатии)
 
 let canvas = document.getElementById('gameCanvas');
 let ctx = canvas.getContext('2d');
