@@ -15,6 +15,11 @@ let a = 333; // ШИРИНА РУК
 let b = 600; // ВЫСОТА РУК
 let c = 600; // Переменная высоты рук
 
+let scrollY = 0;  // Смещение экрана (0 = вверху, 100 = всё сдвинулось вниз)
+let currentSpeed = 1;        // Текущая скорость движения
+let minSpeed = 1;            // Минимальная скорость (скольжение)
+let maxSpeed = 10;           // Максимальная скорость (падение)
+
 let canvas = document.getElementById('gameCanvas');
 let ctx = canvas.getContext('2d');
 
@@ -84,9 +89,20 @@ function draw() //Рисуем
     
     if (backgroundImage.complete && backgroundImage.src) 
     {
-    ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height); //ФОН
-
-drawScaled(tableImage);
+// ФОН ДВИГАЕТСЯ ВВЕРХ
+ctx.drawImage(backgroundImage, 0, scrollY, canvas.width, canvas.height);
+ctx.drawImage(backgroundImage, 0, scrollY - canvas.height, canvas.width, canvas.height);
+     
+// flought_table ДВИГАЕТСЯ ВВЕРХ
+if (tableImage.complete) {
+    let w = tableImage.width * NEW_IMAGE_SCALE;
+    let h = tableImage.height * NEW_IMAGE_SCALE;
+    let x = (canvas.width - w) / 2;
+    let y = (canvas.height - h) / 2 + scrollY;
+    ctx.drawImage(tableImage, x, y, w, h);
+    // Вторая копия для бесконечности
+    ctx.drawImage(tableImage, x, y - canvas.height, w, h);
+}
 drawScaled(airoplaneImage);
 drawScaled(mImage);
 drawScaled(msImage);
@@ -209,18 +225,36 @@ trampedFrame2.onload = tryDraw;
 
 // ФУНКЦИЯ АНИМАЦИИ ТРУБЫ
 let brakingStartCounter = 0;
+let brakingSpeedCounter = 0;
 
 function updateAnimation() 
 {
+    // ===== 1. ОБНОВЛЯЕМ СКОРОСТЬ ДВИЖЕНИЯ =====
+    if (isBraking) {
+        let speedPercent = Math.min(brakingSpeedCounter / maxSpeedFrames, 1);
+        currentSpeed = minSpeed + (maxSpeed - minSpeed) * speedPercent;
+        brakingSpeedCounter++;
+    } else {
+        currentSpeed = minSpeed;
+        brakingSpeedCounter = 0;
+    }
+    
+    // ===== 2. ДВИГАЕМ ФОН И ПРЕПЯТСТВИЯ ВВЕРХ =====
+    scrollY = scrollY + currentSpeed;
+    
+    // Сброс для бесконечности
+    if (scrollY > canvas.height) {
+        scrollY = scrollY - canvas.height;
+    }
+    
+    // ===== 3. МЕНЯЕМ КАДРЫ ТРУБЫ =====
     let currentDelay;
     
     if (isBraking) {
-        // РЕЖИМ ПАДЕНИЯ: плавное ускорение
         let speed = Math.min(brakingStartCounter / maxSpeedFrames, 1);
         currentDelay = frameDelay - (frameDelay - fastFrameDelay) * speed;
         brakingStartCounter++;
     } else {
-        // РЕЖИМ СКОЛЬЖЕНИЯ: постоянная скорость
         currentDelay = frameDelay;
         brakingStartCounter = 0;
     }
@@ -229,8 +263,10 @@ function updateAnimation()
     if (frameCounter >= currentDelay) {
         frameCounter = 0;
         currentFrame = (currentFrame + 1) % trampedFrames.length;
-        draw();
     }
+    
+    draw();
 }
+
 // ЗАПУСКАЕМ АНИМАЦИЮ (каждые 50 миллисекунд)
 setInterval(updateAnimation, 50);
