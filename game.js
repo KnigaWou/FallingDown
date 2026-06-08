@@ -7,7 +7,7 @@ let trampedFrames = [];      // массив для хранения кадро�
 let currentFrame = 0;        // какой кадр сейчас показываем (0, 1 или 2)
 let frameCounter = 0;        // счётчик для задержки между кадрами
 
-let frameDelay = 17;      // СКОЛЬЖЕНИЕ
+let frameDelay = 23;      // СКОЛЬЖЕНИЕ
 let fastFrameDelay = 4;   // ПАДЕНИЕ
 let maxSpeedFrames = 20;  // Через x циклов падения достигаем максимальной скорости
 
