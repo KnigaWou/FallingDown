@@ -8,7 +8,7 @@ let currentFrame = 0;        // какой кадр сейчас показыв�
 let frameCounter = 0;        // счётчик для задержки между кадрами
 
 let frameDelay = 17;      // СКОЛЬЖЕНИЕ
-let fastFrameDelay = 3;   // ПАДЕНИЕ
+let fastFrameDelay = 4;   // ПАДЕНИЕ
 let maxSpeedFrames = 20;  // Через x циклов падения достигаем максимальной скорости
 
 let a = 333; // ШИРИНА РУК
